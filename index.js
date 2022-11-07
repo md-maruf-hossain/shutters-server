@@ -9,3 +9,13 @@ app.use(cors());
 app.use(express.json());
 
 
+
+
+
+// testing
+app.get("/", (req, res) => {
+  res.send("shutter testing server is running");
+});
+app.listen(port, () => {
+  console.log(`shutter server is running on port ${port}`);
+});
