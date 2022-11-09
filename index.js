@@ -34,12 +34,18 @@ async function run(){
       res.send(result);
     });
 
-    // review
+    // review data 
+    app.get('/review', async(req, res)=>{
+      const query = {};
+      const reviewResult = reviewCollection.find(query);
+      const reviews =  await reviewResult.toArray();
+      res.send(reviews);
+    })
     app.post('/review', async(req, res)=>{
       const reviews = req.body;
       const result = await reviewCollection.insertOne(reviews);
       res.send(result);
-    })
+    });
   }
   finally{
 
