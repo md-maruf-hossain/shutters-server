@@ -34,7 +34,7 @@ async function run(){
       res.send(result);
     });
 
-    // review query
+    // review query with email
     app.get('/review', async(req, res)=>{
       let query = {};
       if(req.query.email){
@@ -46,13 +46,18 @@ async function run(){
       const queryReview = await reviewData.toArray();
       res.send(queryReview);
     })
-    // review data 
+    // review data query by service_id
     app.get('/review', async(req, res)=>{
-      const query = {};
+      let query = {};
+      if(req.query.service_id){
+        query={
+          serviceId: req.query.service_id
+        }
+      }
       const reviewResult = reviewCollection.find(query);
       const reviews =  await reviewResult.toArray();
       res.send(reviews);
-    })
+    });
     app.post('/review', async(req, res)=>{
       const reviews = req.body;
       const result = await reviewCollection.insertOne(reviews);
